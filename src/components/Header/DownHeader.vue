@@ -3,20 +3,24 @@
     <div class="main-header">
       <div class="header">
         <div class="brand">
-          <h1 class="logo">
-          vuelish
-          </h1>
+          <h1 class="logo">vuelish</h1>
         </div>
         <div class="form-control">
           <div v-if="!user" class="sign-up">
-            <router-link class="link" to="/signup">   عضویت  </router-link> 
+            <router-link class="link" to="/signup"> عضویت </router-link>
           </div>
           <div class="log-in">
-            <router-link v-if="!user" class="link" to="/login">   ورود </router-link> 
-            <router-link @click="signOut" v-if="user" class="link" to="#">   خروج </router-link> 
+            <router-link v-if="!user" class="link" to="/login">
+              ورود
+            </router-link>
+            <router-link @click="signOut" v-if="user" class="link" to="#">
+              خروج
+            </router-link>
           </div>
-          <div v-if="user"  class="create-post">
-            <router-link class="link" to="/create-post">   ایجاد پست <i class="fa fa-plus"></i> </router-link> 
+          <div v-if="user" class="create-post">
+            <router-link class="link" to="/create-post">
+              ایجاد پست <i class="fa fa-plus"></i>
+            </router-link>
           </div>
         </div>
       </div>
@@ -25,96 +29,95 @@
 </template>
 
 <script>
-import firebase from 'firebase/app';
-import 'firebase/auth'
+import firebase from "firebase/app";
+import "firebase/auth";
 export default {
-    computed:{
-    user(){
+  computed: {
+    user() {
       return this.$store.state.user;
-    }
+    },
   },
-  methods:{
-    signOut(){
+  methods: {
+    signOut() {
       firebase.auth().signOut();
       window.location.reload();
-    }
+    },
   },
-}
+};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@497;700&family=Great+Vibes&display=swap');
-header{
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@497;700&family=Great+Vibes&display=swap");
+header {
   background-color: rgb(255, 255, 255);
   position: fixed;
-  top:6.9rem;
+  top: 6.9rem;
   z-index: 101;
 }
-.main-header{
-  width:100vw;
+.main-header {
+  width: 100vw;
   padding: 0 5rem;
 }
-.header{
+.header {
   width: 100%;
   height: 8rem;
   padding: 1rem 0;
   display: flex;
   justify-content: space-between;
 }
-.logo{
+.logo {
   font-size: 5rem;
   color: rgb(73, 70, 241);
-  font-family: 'Great Vibes', cursive;
+  font-family: "Great Vibes", cursive;
   letter-spacing: 1.2rem;
 }
-.form-control{
+.form-control {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.link{
+.link {
   font-size: large;
   text-decoration: none;
-  font-family: 'shabnam';
+  font-family: "shabnam";
   color: white;
 }
-.log-in{
-  margin-right: .5rem;
-  padding:.5rem 1.8rem;
+.log-in {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1.8rem;
   background-color: rgb(231, 156, 17);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
-.create-post{
-  margin-right: .5rem;
-  padding:.5rem 1rem;
+.create-post {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
   background-color: rgb(0, 255, 64);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
-.sign-up{
-  padding:.5rem 1.8rem;
+.sign-up {
+  padding: 0.5rem 1.8rem;
   background-color: rgb(231, 156, 17);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
-.log-in:hover{
+.log-in:hover {
   background-color: rgb(255, 200, 19);
 }
-.sign-up:hover{
+.sign-up:hover {
   background-color: rgb(255, 200, 19);
 }
 
-@media screen and (max-width:50.6875rem) {
-  header{
-   display: none;
+@media screen and (max-width: 50.6875rem) {
+  header {
+    display: none;
   }
 }
 
-
-@media screen and (max-width:35.25rem) {
-  header{
-   display: none;
+@media screen and (max-width: 35.25rem) {
+  header {
+    display: none;
   }
 }
 </style>

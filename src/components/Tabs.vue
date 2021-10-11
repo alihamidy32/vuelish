@@ -5,23 +5,21 @@
 </template>
 
 <script>
-import { inject } from 'vue'
+import { inject } from "vue";
 export default {
-  props:{
-    title:{
-      type:String
-    }
+  props: {
+    title: {
+      type: String,
+    },
   },
-  setup(){
-    const selectedTitle = inject('selectedTitle')
+  setup() {
+    const selectedTitle = inject("selectedTitle");
 
     return {
-      selectedTitle
-    }
-  }
-}
+      selectedTitle,
+    };
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

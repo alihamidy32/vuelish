@@ -1,58 +1,56 @@
 <template>
-<article>
-  <div class="blog">
-    <back-drop v-if="activeDrop"/>
-    <the-header 
-    @showDrop="showBackDrop"
-    @ellipses="showMainSlider" />
-    <slide-article v-if="logSlide" />
-    <div class="contact-content">
-      <cardinfo :items="blogPosts" />
+  <article>
+    <div class="blog">
+      <back-drop v-if="activeDrop" />
+      <the-header @showDrop="showBackDrop" @ellipses="showMainSlider" />
+      <slide-article v-if="logSlide" />
+      <div class="contact-content">
+        <cardinfo :items="blogPosts" />
+      </div>
     </div>
-  </div>
-</article>
+  </article>
 </template>
 
 <script>
-import Cardinfo from '../components/Article/Cardinfo.vue'
-import SlideArticle from '../components/Article/SlideArticle.vue'
-import BackDrop from '../components/BackDrop.vue'
-import TheHeader from '../components/Header/TheHeader.vue'
+import Cardinfo from "../components/Article/Cardinfo.vue";
+import SlideArticle from "../components/Article/SlideArticle.vue";
+import BackDrop from "../components/BackDrop.vue";
+import TheHeader from "../components/Header/TheHeader.vue";
 
 export default {
-  components: { TheHeader, BackDrop, SlideArticle, Cardinfo},
-  data(){
-    return{
-      logSlide:false,
-      activeDrop:false,
-    }
+  components: { TheHeader, BackDrop, SlideArticle, Cardinfo },
+  data() {
+    return {
+      logSlide: false,
+      activeDrop: false,
+    };
   },
-  computed:{
-    blogPosts (){
-      return this.$store.state.blogPosts
-    }
-  },
-  methods:{
-    showBackDrop(){
-      this.activeDrop = !this.activeDrop
+  computed: {
+    blogPosts() {
+      return this.$store.state.blogPosts;
     },
-    showMainSlider(){
-      this.logSlide = !this.logSlide
-      this.activeDrop = !this.activeDrop
-    }
-  }
-}
+  },
+  methods: {
+    showBackDrop() {
+      this.activeDrop = !this.activeDrop;
+    },
+    showMainSlider() {
+      this.logSlide = !this.logSlide;
+      this.activeDrop = !this.activeDrop;
+    },
+  },
+};
 </script>
 
 <style scoped>
-.contact-content{
+.contact-content {
   max-width: 95rem;
   margin: auto;
   padding: 0 2rem;
   position: relative;
   top: 15rem;
 }
-.blog{
+.blog {
   position: relative;
   top: 15rem;
   z-index: 77;

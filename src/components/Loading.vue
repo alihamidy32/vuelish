@@ -6,28 +6,28 @@
 
 <script>
 export default {
-  name:"loading"
-}
+  name: "loading",
+};
 </script>
 
 <style scoped>
-.loading{
-  top:0;
+.loading {
+  top: 0;
   z-index: 101;
   width: 100%;
   height: 100%;
   position: fixed;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 @keyframes spin {
-  to{
+  to {
     transform: rotateZ(360deg);
   }
 }
-span{
+span {
   display: block;
   width: 3.8rem;
   height: 3.8rem;

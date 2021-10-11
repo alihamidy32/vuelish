@@ -6,9 +6,9 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
-    meta:{
-      title:"Home"
-    }
+    meta: {
+      title: "Home",
+    },
   },
   {
     path: "/about",
@@ -18,9 +18,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
-    meta:{
-      title:"About"
-    }
+    meta: {
+      title: "About",
+    },
   },
   {
     path: "/blog",
@@ -30,9 +30,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Blog.vue"),
-    meta:{
-      title:"Blog"
-    }
+    meta: {
+      title: "Blog",
+    },
   },
   {
     path: "/signup",
@@ -42,9 +42,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/SignUp.vue"),
-    meta:{
-      title:'Register/SignUp'
-    }
+    meta: {
+      title: "Register/SignUp",
+    },
   },
   {
     path: "/login",
@@ -54,9 +54,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/LogIn.vue"),
-    meta:{
-      title:'Register/LogIn'
-    }
+    meta: {
+      title: "Register/LogIn",
+    },
   },
   {
     path: "/remember",
@@ -66,9 +66,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Remember.vue"),
-    meta:{
-      title:'Register/Remember'
-    }
+    meta: {
+      title: "Register/Remember",
+    },
   },
   {
     path: "/create-post",
@@ -78,9 +78,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/CreatePost.vue"),
-    meta:{
-      title:'Register/Create-Post'
-    }
+    meta: {
+      title: "Register/Create-Post",
+    },
   },
   {
     path: "/preview-blog",
@@ -90,9 +90,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/PreviewBlog.vue"),
-    meta:{
-      title:'Register/Preview-Blog'
-    }
+    meta: {
+      title: "Register/Preview-Blog",
+    },
   },
   {
     path: "/view-blog/:blogid",
@@ -102,9 +102,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ViewBlog.vue"),
-    meta:{
-      title:'Register/view-Blog'
-    }
+    meta: {
+      title: "Register/view-Blog",
+    },
   },
 ];
 
@@ -113,9 +113,9 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title} | Vuelish`;
   next();
-})
+});
 
 export default router;

@@ -2,23 +2,26 @@
   <article>
     <div class="sign-blog">
       <div class="blog">
-        <form  class="frm-blg">
+        <form class="frm-blg">
           <label for="e-mail" class="mail-blog">
-           Email :
-           <input type="email" v-model="email" placeholder="Example@gmail.com" class="email">
+            Email :
+            <input
+              type="email"
+              v-model="email"
+              placeholder="Example@gmail.com"
+              class="email"
+            />
           </label>
           <label for="pass" class="pass-blog">
             Password :
-           <input type="password" v-model="pass" class="pass">
+            <input type="password" v-model="pass" class="pass" />
           </label>
           <label for="pass" class="pass-blog">
             ReEnter Password :
-           <input type="password" v-model="repass"  class="pass">
+            <input type="password" v-model="repass" class="pass" />
           </label>
-          <div v-show="error" class="error">{{errorMsg}}</div>
-          <button @click.prevent="register" class="btn">
-             عضویت
-          </button>
+          <div v-show="error" class="error">{{ errorMsg }}</div>
+          <button @click.prevent="register" class="btn">عضویت</button>
         </form>
       </div>
     </div>
@@ -28,65 +31,68 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/auth";
-import {db} from "@/main";
+import { db } from "@/main";
 export default {
-  data(){
-    return{
+  data() {
+    return {
       email: "",
-      pass:  "",
+      pass: "",
       repass: "",
-      error:null,
-      errorMsg:""
-    }
+      error: null,
+      errorMsg: "",
+    };
   },
-  methods:{
-    async register(){
-      if(
-        this.email !== ""&& 
+  methods: {
+    async register() {
+      if (
+        this.email !== "" &&
         this.pass !== "" &&
         this.repass !== "" &&
-        this.repass === this.pass){
+        this.repass === this.pass
+      ) {
+        this.error = false;
+        this.errorMsg = "";
+        try {
+          const firebaseAuth = await firebase.auth();
+          const createUser = await firebaseAuth.createUserWithEmailAndPassword(
+            this.email,
+            this.pass
+          );
+          const result = await createUser;
+          const dataBase = db.collection("users").doc(result.user.uid);
+          await dataBase.set({
+            userName: this.email,
+            password: this.pass,
+          });
+          this.$router.push({ name: "Home" });
+        } catch (error) {
+          (this.error = true),
+            (this.errorMsg = ".گذر واژه انتخابی حداقل باید شامل شش حرف باشد");
+        }
+        setTimeout(() => {
           this.error = false;
-          this.errorMsg = "";
-          try{
-            const firebaseAuth = await firebase.auth();
-            const createUser = await firebaseAuth.createUserWithEmailAndPassword(this.email , this.pass);
-            const result = await createUser;
-            const dataBase = db.collection("users").doc(result.user.uid);
-            await dataBase.set({
-              userName : this.email,
-              password : this.pass
-            });
-            this.$router.push({name:"Home"})
-          }catch(error){
-            this.error = true,
-            this.errorMsg = ".گذر واژه انتخابی حداقل باید شامل شش حرف باشد"
-          }
-          setTimeout(() => {
-            this.error = false
-          }, 5000);
-          return;
+        }, 5000);
+        return;
+      } else {
+        this.error = true;
+        if (this.repass !== this.pass) {
+          this.errorMsg = "عدم تشابه در گذر واژه ها";
+        } else {
+          this.errorMsg = "لطفا فیلدهای خالی پر گردد.";
         }
-        else{
-          this.error = true;
-          if(this.repass !== this.pass){
-            this.errorMsg = "عدم تشابه در گذر واژه ها"
-          }else{
-            this.errorMsg = "لطفا فیلدهای خالی پر گردد."
-          }
-          setTimeout(() => {
-            this.error = false
-          }, 5000);
-        }
-          return;
-    }
-  }
-}
+        setTimeout(() => {
+          this.error = false;
+        }, 5000);
+      }
+      return;
+    },
+  },
+};
 </script>
 
 <style scoped>
-.sign-blog{
-  padding:5.5rem 1.5rem;
+.sign-blog {
+  padding: 5.5rem 1.5rem;
   width: 100%;
   height: 91%;
   display: flex;
@@ -94,12 +100,12 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.blog{
+.blog {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.frm-blg{
+.frm-blg {
   direction: ltr;
   display: flex;
   flex-direction: column;
@@ -109,29 +115,29 @@ export default {
   height: 100%;
 }
 .mail-blog,
-.pass-blog{
+.pass-blog {
   font-size: 1.2rem;
   margin-bottom: 1rem;
   width: 100%;
 }
 .email,
-.pass{
+.pass {
   width: 100%;
-  padding: .8rem;
-  border-radius: .5rem;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
 }
-.btn{
-  padding: .3rem 1.2rem;
-  font-family: 'yekan';
+.btn {
+  padding: 0.3rem 1.2rem;
+  font-family: "yekan";
   font-size: 1.3rem;
   background-color: orangered;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   color: white;
   width: 100%;
 }
-.error{
+.error {
   text-align: center;
-  font-family: 'vazir';
+  font-family: "vazir";
   font-size: 1.2rem;
   color: red;
 }
